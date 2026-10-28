@@ -33,7 +33,10 @@ Every visible element must help users understand the data, make a decision, navi
 - Never build a large hero, banner, title card, or separate container solely to display the title or noncritical text.
 - Use compact, legible typography, clear alignment, sensible grouping, and responsive layouts. Retain enough spacing for scanning and comfortable interaction.
 - Do not shrink text, crowd controls, or remove necessary context just to fit more on screen.
+- Give informative visualizations enough room to communicate clearly. Optimize space around the information; a useful graph, diagram, or simulation can deserve substantial space.
 - Place frequent actions and important information where they are easy to find. Use progressive disclosure for secondary details when it improves the task.
+- Establish a clear primary action in each task context. Give secondary and tertiary actions progressively quieter treatments. Keep labels concrete, such as "Save changes" or "Export PNG".
+- Keep related filters, counts, view switches, and actions together. Avoid making users travel between distant parts of the page to complete one task.
 
 ### Minimal, meaningful structure
 
@@ -54,6 +57,8 @@ Inspect the existing implementation and establish:
 - The framework, design system, accessibility requirements, and performance constraints.
 - Existing behaviors, integrations, and components worth preserving.
 - Sources of wasted space, unnecessary text, unclear interaction, and redundant markup.
+- The meaning of existing colors and statuses, including domain conventions users already understand.
+- Relationships, quantities, processes, or changes that would be understood best through charts, diagrams, custom graphics, or visual animation.
 
 Infer routine choices from the request and repository. Ask only for missing information that materially changes the result. Keep design reasoning brief and move into implementation once the requirements are clear.
 
@@ -68,7 +73,106 @@ Choose a visual direction suited to the product, audience, and task. Make it dis
 
 When redesigning, identify what works before replacing anything. Preserve functionality unless the user requests a change. Improve semantic structure, reusable styles, and theme tokens where useful.
 
-## 4. Visual and Interaction Standards
+### Design reference: Peerbrush
+
+Use https://peerbrush.com/ as a general reference for coherent visual design. Apply its useful principles within this preset's compact branding and functional-content requirements:
+
+- A restrained neutral foundation gives content and controls a clear stage. On Peerbrush, warm dark surfaces, light text, and controlled orange accents create a consistent identity.
+- Distinct colors can communicate ownership and state: its layer example identifies AI work in blue, while connection guidance uses green for a connected client.
+- A compact navigation bar, clear action hierarchy, and consistent icon treatment make destinations and controls easy to recognize.
+- Real product views and interactive examples explain capabilities concretely. Its layer example and selectable workspace views connect an explanation to a visible result.
+- Use short, specific explanations next to the thing they describe. Prefer a useful preview or direct interaction when it can replace a longer explanation.
+- Let the product and its data provide visual interest. Keep prominent imagery relevant to what the page actually helps the user do.
+
+Carry these principles into an original interface appropriate to the project. Keep titles compact, avoid title-only sections, and add demonstrations only when they clarify a real task.
+
+## 4. Semantic Color System
+
+Choose a specific color palette for the product being designed before implementing the interface. Base the choice on its purpose, brand, audience, domain conventions, content, viewing conditions, and accessibility needs. Every recurring interface color must have a defined role, and that role must stay consistent within that product.
+
+### Choose for the product and define the contract
+
+- Preserve a coherent existing brand and semantic palette when available. Otherwise, deliberately create a complete palette suited to this product. Choose the surface tones, accents, semantic colors, and supported themes together.
+- Treat reference palettes as examples of good color logic. Do not automatically reuse their exact colors, dark theme, or role-to-hue assignments across projects.
+- Record the chosen palette in shared theme tokens, including exact color values, foreground/background pairs, and state variants. Keep this in the existing theme code or design documentation; do not add a palette explanation to the product UI unless users need a legend.
+- Treat those tokens as the single source of truth. Components must consume semantic names such as --color-danger-fg, rather than invent local hex values or choose colors independently.
+- Once chosen for this product, keep role assignments consistent across its pages, components, sessions, and breakpoints. A theme may use different shades for contrast, but success must retain its success meaning and selection must retain its selection meaning. Each new product receives its own deliberate palette choice.
+- Change a chosen value centrally when a genuine accessibility issue or requested redesign requires it. Update all affected uses together.
+
+### Semantic roles within the chosen product palette
+
+- Neutral colors: canvas, surfaces, text, dividers, ordinary controls, and inactive states. Use a small surface scale to establish grouping and depth.
+- Brand/action accent: the product identity and the primary action in a task context. Secondary actions usually remain neutral. The accent does not automatically mean success, warning, or selection.
+- Selection: the current navigation item, tab, row, tool, or chosen option. Reinforce it with a check, indicator, border, or other visible state. Hover and keyboard focus must remain distinguishable from selection.
+- Success: a confirmed successful outcome, healthy state, or completed operation. Do not use it to imply that an operation succeeded before confirmation.
+- Warning: a real caution, limitation, or pending risk that needs attention. Ordinary secondary information is not a warning.
+- Danger: failure, invalid input, a critical condition, or a destructive action. Do not use it as decoration or for routine dismiss/close controls.
+- Information: explanatory status or neutral system feedback that needs emphasis without implying success or risk.
+- Keyboard focus: a consistent, clearly visible outline or equivalent indicator. Keep it visible on neutral, selected, and semantic states.
+
+### Illustrative example: warm charcoal, ember action, plum selection
+
+The following Peerbrush-inspired example demonstrates how one coherent palette can assign colors to functional roles. It is an illustration, not a default palette or a requirement to use these hues. Select and implement the actual colors for the product being designed. Neutral, orange, plum, blue, and green cues draw on the reference; the complete role assignment and paired tokens below illustrate this preset's color logic.
+
+```css
+:root {
+  --color-canvas: #161417;
+  --color-surface: #201E21;
+  --color-surface-raised: #29262B;
+  --color-text: #F5F2F0;
+  --color-text-muted: #B5AEB7;
+  --color-divider: #403B44;
+  --color-control-border: #8C8490;
+
+  --color-brand: #E95420;
+  --color-action-bg: var(--color-brand);
+  --color-action-fg: #161417;
+  --color-action-hover-bg: #FF7A45;
+
+  --color-selection-bg: #4D344A;
+  --color-selection-fg: #F5F2F0;
+  --color-selection-indicator: #C49AC4;
+  --color-focus: #F5F2F0;
+
+  --color-success-fg: #8FCF8F;
+  --color-success-bg: #1E3225;
+  --color-warning-fg: #F2C66D;
+  --color-warning-bg: #3A2E18;
+  --color-danger-fg: #FF8080;
+  --color-danger-bg: #3D2227;
+  --color-info-fg: #5AAAFF;
+  --color-info-bg: #1B2C42;
+}
+```
+
+- In this example, the orange filled action uses dark text. This illustrates the need to choose readable foreground/background pairs for the actual palette.
+
+### Apply the product's chosen palette
+
+- Use each foreground with its matching background or an independently verified neutral surface. Verify label contrast on filled actions; white text will not be readable on every accent color.
+- Keep --color-divider for subtle grouping. Use --color-control-border when a visible boundary is necessary to identify a control.
+- Use semantic colors in small, meaningful areas such as indicators, icons, borders, and compact badges. Keep most of the interface neutral so important states remain easy to spot.
+- Derive hover and pressed variants within the same role. Keep the same intent during a transition; a routine hover must not turn a control into a warning or error.
+- If the product requires a light theme, define a complete light-theme token set with the same role assignments and verified contrast. Do not merely invert colors or force a dark theme onto a project with established requirements.
+
+### Domain colors and conflicting states
+
+- Define additional stable mappings within the product only for concepts it actually needs, such as manual versus automated work, account types, or chart series. Use a stable entity key so colors survive sorting, filtering, pagination, and refreshes. Do not assign colors from the current row or array index.
+- Keep categorical identity, selection, and status distinguishable. For example, a selected row with an error can retain its selection outline while showing a labeled danger icon for the error. Preserve the entity's identity in its own marker.
+- Reserve status colors for their meanings in UI indicators. When a chart uses categorical colors, maintain a separate documented series mapping and reinforce identity with labels, line styles, or marker shapes. Use ordered scales for quantities and a meaningful midpoint for diverging data when appropriate.
+- Keep positive/negative interpretations consistent with the domain. A larger value is not automatically good, and a smaller value is not automatically bad.
+- Avoid encoding every distinction with another hue. Use shape, position, text, and weight when they communicate more clearly.
+
+### Color accessibility
+
+- Always reinforce meaningful color with visible text, an icon, a pattern, or another non-color cue. An accessible name alone does not help a sighted user distinguish colors.
+- Check actual rendered foreground/background combinations, including transparency, imagery, hover, focus, selection, and errors. Aim for at least 4.5:1 for normal text and 3:1 for large text. Essential control boundaries, state indicators, and meaningful graphics need at least 3:1 against adjacent colors.
+- Keep secondary text readable. Do not reduce essential information to faint gray or signal a state only with low opacity.
+- Preserve understandable states in reduced-color and forced-color environments. Do not depend on a subtle tint alone.
+
+Color references: https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html, https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html, https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html
+
+## 5. Visual and Interaction Standards
 
 ### Typography and hierarchy
 
@@ -76,17 +180,33 @@ When redesigning, identify what works before replacing anything. Preserve functi
 - Avoid oversized display typography for routine page titles. Use a restrained scale that makes data and actions easy to scan.
 - Control line length, line height, weight, and contrast. Use consistent number and unit formatting where relevant.
 - Make headings useful navigational landmarks. Avoid repeating the same title or explanation across nested panels.
+- Use tabular numerals and consistent precision for comparable values. Keep units, labels, and values close enough to read as a single piece of information.
 
-### Color and visual cues
+### Icons and visual cues
 
-- Define reusable color, spacing, typography, and motion tokens where appropriate.
-- Use color deliberately to distinguish actions, selection, grouping, and state.
-- Pair color with a label, icon, shape, or other cue when it communicates meaning.
+- Use the chosen semantic color tokens consistently. Define reusable spacing, typography, and motion tokens where appropriate.
 - Use icons, emoji, badges, and small visual indicators wherever they improve recognition or explain status and functionality.
 - Choose familiar, consistent icons. Use an existing icon set when suitable; create simple original SVG icons when an appropriate symbol is missing.
+- Keep icon size, stroke weight, alignment, and meaning consistent. The same action should retain the same symbol throughout the product.
 - Use emoji purposefully and consistently where they make the interface clearer. Account for differences in rendering and meaning across platforms.
 - Give icon-only controls accessible names. Add tooltips when the action would otherwise be unclear, and retain visible labels when users need them.
 - Treat decorative icons as decorative for assistive technology. Avoid redundant icons or visual clutter.
+
+### Information graphics and complex visual elements
+
+Actively add sophisticated visual elements wherever they communicate information, relationships, functionality, or change more clearly than text or simple controls. Choose the best representation for the user's question and the actual data. Useful visual complexity deserves the implementation effort it requires.
+
+- Use graphs and charts for comparisons, trends, distributions, proportions, and correlations. Use timelines for sequences and schedules, maps for spatial information, and matrices or heatmaps for patterns across dimensions.
+- Use node graphs, dependency diagrams, flow diagrams, and other connected views when users need to understand relationships, system structure, branching, or movement between stages.
+- Create hand-coded SVG, canvas, CSS graphics, or WebGL visuals when custom rendering explains the information best. Add interactive simulations, schematics, layered views, and other specialized visualizations when they serve the product's purpose.
+- Use complex, coordinated visual animation to explain processes, data flow, causality, transformations, or changes over time. Synchronize highlights, labels, moving elements, and values so users can follow what is happening.
+- Add useful exploration such as zoom, pan, filtering, selection, linked highlighting, drill-down, scrubbing, or parameter controls when users need to inspect detail or test scenarios. Make interactions discoverable and provide a clear way to return to the overview.
+- Base visual marks, connections, scales, and motion on real data and behavior. Label units, axes, direction, uncertainty, and legends where needed. Do not invent relationships or distort scales for visual impact.
+- Integrate visuals directly with the relevant task, data, and controls. Give them sufficient space and detail to be useful while retaining the page's clear hierarchy and compact structure.
+- Provide accessible labels, keyboard-operable controls, and a useful text or tabular equivalent for essential information. Keep reduced-motion and static alternatives understandable.
+- Choose suitable existing libraries when they improve correctness or maintainability; write custom visuals when the information or interaction requires them. Keep rendering responsive for realistic data sizes.
+
+Simple markup and functional content are compatible with rich information design. Use the visual sophistication needed to communicate the information in the best possible way.
 
 ### Motion that explains functionality
 
@@ -97,7 +217,9 @@ Make the page feel alive through many small, purposeful interactions across the 
 - Animate expansion and collapse to reveal where content comes from and where it goes.
 - Use transitions to make sorting, reordering, filtering, toggling, drag and drop, and changes in data easier to follow when those interactions exist.
 - Use subtle icon changes, progress indicators, and completion feedback to communicate what the interface is doing.
+- Keep feedback close to the triggering control or changed data. A toggle, selected icon, result count, or inline status should make the consequence of the user's action apparent.
 - Make every animation communicate something useful. Keep it brief, responsive, and consistent, with no delay before an action takes effect.
+- Use a small shared timing scale as a starting point for control feedback: roughly 120-180 ms for immediate feedback and 180-260 ms for simple expansion or movement. Explanatory sequences, simulations, and complex visual animations may need longer, deliberately paced timelines with pause, replay, or scrubbing controls when useful. Keep normal controls responsive throughout.
 - Use entrance animations, staggered reveals, or scroll effects only when they improve comprehension or orientation. Keep essential information immediately available.
 - Avoid continuous decorative motion, attention-grabbing loops, and effects that make reading or interaction harder.
 - Respect prefers-reduced-motion and provide equivalent understandable feedback without unnecessary movement. Never rely on animation alone to convey important information.
@@ -110,12 +232,14 @@ Make the page feel alive through many small, purposeful interactions across the 
 - Use flat backgrounds freely when they improve readability. Add texture, gradients, shadows, or translucency only when they improve hierarchy or understanding.
 - Reserve illustration and other large visual areas for content the user needs or explicitly requests.
 - Keep essential actions reachable at different viewport sizes. Reflow dense information deliberately without hiding critical data.
+- For data-heavy views, preserve useful column alignment, sorting context, filter state, and scroll position where possible. Use sticky headers or local overflow when they improve navigation; avoid page-wide horizontal scrolling.
 
-## 5. Production Implementation
+## 6. Production Implementation
 
 Deliver real, maintainable code integrated with the repository's conventions.
 
 - Implement complete interactions and relevant loading, empty, error, disabled, and success states.
+- Keep controls and outcomes directly connected. Preserve entered data on failure, explain recoverable problems near the relevant field or action, and make the next useful step apparent.
 - Use semantic controls, keyboard support, visible focus, sufficient contrast, and comfortable touch targets.
 - Preserve useful browser behavior and accessible names. Manage focus appropriately for dialogs and other interactive overlays.
 - Keep dependencies, component complexity, and rendering work proportionate to the actual functionality.
@@ -123,7 +247,7 @@ Deliver real, maintainable code integrated with the repository's conventions.
 - Remove obsolete wrappers, unused styles, and redundant code introduced or superseded by the redesign.
 - Match implementation effort to the interface's needs. Minimalist design still requires precise spacing, state design, and interaction feedback.
 
-## 6. Verify the Actual Experience
+## 7. Verify the Actual Experience
 
 Run the project's relevant checks and inspect the rendered interface at representative desktop and mobile sizes when the environment permits. Exercise the main interaction paths, keyboard navigation, and reduced-motion behavior.
 
@@ -134,15 +258,18 @@ Before finishing, review:
 - Are useful data and actions prioritized over decoration?
 - Can any single-child div or title-only wrapper be removed?
 - Do icons, emoji, and visual cues make the interface easier to understand?
+- Was the palette chosen specifically for this product, with explicit shared tokens and stable meanings for actions, selection, status, and any domain-specific categories?
+- Do color meanings stay consistent across views, interaction states, charts, and supported themes, with sufficient contrast and visible non-color cues?
 - Do the implemented animations explain behavior, changes, and feedback without causing distraction?
+- Are graphs, node diagrams, custom graphics, complex animations, and other rich visuals implemented wherever they materially improve understanding? Are they accurate, usable, accessible, and connected to the actual information?
 - Is the result readable, accessible, responsive, and functional?
 
 Fix issues found. Keep validation proportional to the change and report any checks that could not be performed.
 
-## 7. Deliver
+## 8. Deliver
 
 Implement the result in the project when repository access is available. If the user requests standalone code, provide complete working code without placeholder implementation comments.
 
-Explain the result briefly: the main UX improvements, meaningful changes, and what was verified. Keep design commentary concise and specific.
+Explain the result briefly: the main UX improvements, the chosen palette and its semantic roles, meaningful changes, and what was verified. Keep design commentary concise and specific.
 
 The standard: a clear, efficient, responsive interface with purposeful content, minimal structure, and useful motion. UX is king.
