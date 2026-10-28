@@ -1,0 +1,148 @@
+Learn this repository quickly, understand the interface's purpose and existing behavior, then use the following process to create or redesign the requested frontend. Implement the result in the project. Preserve working functionality and relevant production constraints while improving the experience.
+
+# Production-Grade Frontend Creation & Redesign Preset
+
+Create distinctive, working interfaces where UX, readability, useful information, and efficient use of space drive every design decision.
+
+This preset applies to new components, pages, and applications, as well as refactoring or redesigning existing frontend code.
+
+## 1. Non-Negotiable Priorities
+
+Use this order when design choices conflict:
+
+1. User tasks, functionality, and accessibility.
+2. Readability, information hierarchy, and efficient use of space.
+3. Clear interaction feedback and useful visual cues.
+4. Aesthetic expression that supports the preceding priorities.
+
+Every visible element must help users understand the data, make a decision, navigate, perform an action, or recognize the interface. Remove anything without a clear purpose.
+
+### Functional content only
+
+- Never add unsolicited slogans, taglines, promotional filler, or generic AI-sounding copy.
+- Do not invent metrics, claims, testimonials, or explanatory paragraphs to fill a layout.
+- Include text only when explicitly requested or necessary for the page's purpose: meaningful data, navigation, labels, instructions, status, errors, or useful context.
+- Keep copy specific, concise, and tied to the actual interface. Avoid repeating what a heading, icon, or adjacent value already makes clear.
+- Include helper text, tooltips, and empty-state guidance when they resolve real ambiguity or explain the next useful action.
+- Keep necessary accessible names and instructions, including visually hidden text where appropriate.
+
+### Optimize space and readability together
+
+- Give useful data and controls the available space. Eliminate oversized padding, unnecessary gaps, redundant panels, and decorative sections.
+- Keep the website or application title and identifying icon present in a slick, compact form. Integrate them into a useful header or navigation row alongside relevant controls.
+- Never build a large hero, banner, title card, or separate container solely to display the title or noncritical text.
+- Use compact, legible typography, clear alignment, sensible grouping, and responsive layouts. Retain enough spacing for scanning and comfortable interaction.
+- Do not shrink text, crowd controls, or remove necessary context just to fit more on screen.
+- Place frequent actions and important information where they are easy to find. Use progressive disclosure for secondary details when it improves the task.
+
+### Minimal, meaningful structure
+
+- Never create a div solely for a title, slogan, or noncritical text. Put a necessary heading directly in its meaningful section or existing layout.
+- An icon or emoji does not need its own div. Render it directly, inline with its label, or inside the control it belongs to.
+- If a div contains only one element, assume the div should be removed. Keep it only when it provides a concrete requirement that cannot be handled cleanly by the child, such as necessary layout, positioning, accessibility, animation clipping, or a library contract.
+- Prefer semantic elements such as header, nav, main, section, button, list, and table when they match the content. Do not replace pointless divs with equally pointless semantic wrappers.
+- Use CSS grid, flexbox, gap, and appropriate pseudo-elements to simplify markup. Avoid nested wrappers and cards around every value.
+- Keep the DOM and component structure as simple as the interaction permits. Do not create components or abstractions without a useful responsibility.
+
+## 2. Understand the Context Before Coding
+
+Inspect the existing implementation and establish:
+
+- The problem the page solves and its primary user tasks.
+- The audience, expected information density, and likely device sizes.
+- The data, controls, and states users actually need.
+- The framework, design system, accessibility requirements, and performance constraints.
+- Existing behaviors, integrations, and components worth preserving.
+- Sources of wasted space, unnecessary text, unclear interaction, and redundant markup.
+
+Infer routine choices from the request and repository. Ask only for missing information that materially changes the result. Keep design reasoning brief and move into implementation once the requirements are clear.
+
+## 3. Choose a Coherent Visual Direction
+
+Choose a visual direction suited to the product, audience, and task. Make it distinctive through precise typography, alignment, hierarchy, color, and interaction.
+
+- Favor refined, compact composition when the page centers on data or operational work.
+- Use a more expressive aesthetic when the actual content and requested purpose call for it.
+- Preserve a useful established visual language unless the requested redesign warrants changing it.
+- Let differentiation come from a clearer experience and deliberate details. Every visual treatment must earn its space.
+
+When redesigning, identify what works before replacing anything. Preserve functionality unless the user requests a change. Improve semantic structure, reusable styles, and theme tokens where useful.
+
+## 4. Visual and Interaction Standards
+
+### Typography and hierarchy
+
+- Choose readable fonts that suit the product and existing system. System fonts are valid when they serve the interface well.
+- Avoid oversized display typography for routine page titles. Use a restrained scale that makes data and actions easy to scan.
+- Control line length, line height, weight, and contrast. Use consistent number and unit formatting where relevant.
+- Make headings useful navigational landmarks. Avoid repeating the same title or explanation across nested panels.
+
+### Color and visual cues
+
+- Define reusable color, spacing, typography, and motion tokens where appropriate.
+- Use color deliberately to distinguish actions, selection, grouping, and state.
+- Pair color with a label, icon, shape, or other cue when it communicates meaning.
+- Use icons, emoji, badges, and small visual indicators wherever they improve recognition or explain status and functionality.
+- Choose familiar, consistent icons. Use an existing icon set when suitable; create simple original SVG icons when an appropriate symbol is missing.
+- Use emoji purposefully and consistently where they make the interface clearer. Account for differences in rendering and meaning across platforms.
+- Give icon-only controls accessible names. Add tooltips when the action would otherwise be unclear, and retain visible labels when users need them.
+- Treat decorative icons as decorative for assistive technology. Avoid redundant icons or visual clutter.
+
+### Motion that explains functionality
+
+Make the page feel alive through many small, purposeful interactions across the controls and states users actually encounter.
+
+- Add animation whenever it helps explain an element's functionality, purpose, state change, or relationship to other content.
+- Provide clear hover, focus, press, selection, loading, success, and error feedback where relevant.
+- Animate expansion and collapse to reveal where content comes from and where it goes.
+- Use transitions to make sorting, reordering, filtering, toggling, drag and drop, and changes in data easier to follow when those interactions exist.
+- Use subtle icon changes, progress indicators, and completion feedback to communicate what the interface is doing.
+- Make every animation communicate something useful. Keep it brief, responsive, and consistent, with no delay before an action takes effect.
+- Use entrance animations, staggered reveals, or scroll effects only when they improve comprehension or orientation. Keep essential information immediately available.
+- Avoid continuous decorative motion, attention-grabbing loops, and effects that make reading or interaction harder.
+- Respect prefers-reduced-motion and provide equivalent understandable feedback without unnecessary movement. Never rely on animation alone to convey important information.
+- Prefer CSS transitions and keyframes for simple motion. Use an animation library only when the interaction justifies its cost. Favor transform and opacity when suitable, and avoid layout shifts.
+
+### Layout and backgrounds
+
+- Choose the layout that best presents the content. Tables, lists, grids, and cards are all valid when they serve the task.
+- Group related information without enclosing everything in a panel. Use alignment, spacing, typography, or a subtle divider when enough.
+- Use flat backgrounds freely when they improve readability. Add texture, gradients, shadows, or translucency only when they improve hierarchy or understanding.
+- Reserve illustration and other large visual areas for content the user needs or explicitly requests.
+- Keep essential actions reachable at different viewport sizes. Reflow dense information deliberately without hiding critical data.
+
+## 5. Production Implementation
+
+Deliver real, maintainable code integrated with the repository's conventions.
+
+- Implement complete interactions and relevant loading, empty, error, disabled, and success states.
+- Use semantic controls, keyboard support, visible focus, sufficient contrast, and comfortable touch targets.
+- Preserve useful browser behavior and accessible names. Manage focus appropriately for dialogs and other interactive overlays.
+- Keep dependencies, component complexity, and rendering work proportionate to the actual functionality.
+- Use existing data and integrations correctly. Clearly distinguish unavailable data without inventing content.
+- Remove obsolete wrappers, unused styles, and redundant code introduced or superseded by the redesign.
+- Match implementation effort to the interface's needs. Minimalist design still requires precise spacing, state design, and interaction feedback.
+
+## 6. Verify the Actual Experience
+
+Run the project's relevant checks and inspect the rendered interface at representative desktop and mobile sizes when the environment permits. Exercise the main interaction paths, keyboard navigation, and reduced-motion behavior.
+
+Before finishing, review:
+
+- Does every visible text string serve the user's task or the page's data?
+- Are the title and identifying icon present, compact, and integrated into useful space?
+- Are useful data and actions prioritized over decoration?
+- Can any single-child div or title-only wrapper be removed?
+- Do icons, emoji, and visual cues make the interface easier to understand?
+- Do the implemented animations explain behavior, changes, and feedback without causing distraction?
+- Is the result readable, accessible, responsive, and functional?
+
+Fix issues found. Keep validation proportional to the change and report any checks that could not be performed.
+
+## 7. Deliver
+
+Implement the result in the project when repository access is available. If the user requests standalone code, provide complete working code without placeholder implementation comments.
+
+Explain the result briefly: the main UX improvements, meaningful changes, and what was verified. Keep design commentary concise and specific.
+
+The standard: a clear, efficient, responsive interface with purposeful content, minimal structure, and useful motion. UX is king.
