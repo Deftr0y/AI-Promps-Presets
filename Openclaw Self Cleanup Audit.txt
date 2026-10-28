@@ -1,0 +1,129 @@
+
+Inspect and simplify this OpenClaw installation so it becomes more reliable, easier to work with, and faster at delivering what I ask for.
+
+Your priority is a working agent with less friction. Find and remove unnecessary machinery, fix recurring problems at their source, and keep the useful capabilities. Do not turn this cleanup into another elaborate system.
+
+This request authorizes inspection and routine, reversible cleanup within my existing authority. Implement clear improvements after checking their dependencies. Do not stop at an audit or make me approve every small edit. Ask only when a consequential decision genuinely requires my input.
+
+1. Start with actual behavior
+
+Inspect the running installation, configuration, prompts, memory, skills, tools, plugins, scheduled jobs, background workers, and task lifecycle.
+
+Read a bounded, representative sample of recent successful and unsuccessful conversations. Pay particular attention to
+- Corrections operators have had to repeat.
+- Tasks that stalled despite having enough information to proceed.
+- Finished results that were withheld or left marked as unfinished.
+- Repeated tool failures, unnecessary retries, and incorrect model selection.
+- Requests for permissions, descriptions, setup, or decisions that were already available.
+- Cases where the operator had to explain how an existing capability works.
+
+Trace symptoms to the code, configuration, or instruction that caused them. Distinguish observed problems from hypotheses. Do not assume that documentation describes the current runtime accurately.
+
+2. Challenge the machinery around the work
+
+Look especially for
+- Task approval, rejection, request-changes, and response-tracking lifecycles.
+- Mandatory reviewer agents, supervisor sign-offs, pilot approvals, and delivery gates.
+- Self-imposed QA rituals, attestation files, receipts, checklists, and documentation requirements that do not improve the requested result.
+- Multiple queues, runners, ledgers, or state machines representing the same task.
+- Watchdogs watching other watchdogs, overlapping reconcilers, and repair loops that create more work.
+- Timers that repeatedly rewrite settings or undo deliberate changes.
+- Automatic self-improvement, skill-review, or maintenance tasks with no demonstrated value.
+- Mandatory delegation, task envelopes, continuation recipes, and model calls for routine polling.
+- Repeated environment discovery and preflight checks whose answers are already known.
+- Duplicate or conflicting instructions across prompts, memory, skills, and configuration.
+- Old compatibility wrappers, package patches, custom providers, and alternate runtimes that native support has made unnecessary.
+- Status-message quotas, heartbeat chatter, and progress tracking that outlive the task.
+- Broad stop conditions where one failed item blocks delivery of otherwise usable results.
+
+Treat names such as “safety,” “reliability,” “governance,” and “QA” as descriptions to investigate, not proof that a mechanism is necessary.
+
+For each substantial mechanism, determine what concrete failure it prevents, whether it is actively used, what it costs, and whether something simpler already provides the same protection. Lack of a recent failure alone does not prove a protection is useless.
+
+3. Simplify the normal task lifecycle
+
+The ordinary flow should be
+
+Understand the request → do the work → check the actual result → deliver it → finish.
+
+Delivery completes the task. If I want changes, my next message becomes a new task, retaining the relevant conversation and assets. Do not require approvalrejection records, review receipts, or response tracking.
+
+If I explicitly ask to approve a draft or pilot before continuing, honor that requirement for that task. Do not turn that exception into a permanent rule for everyone.
+
+Infer routine choices from the request and existing context. Use established defaults. Do not make operators classify tasks, fill in unnecessary fields, or repeat information the agent already has.
+
+Keep long work in an existing background execution path when needed. Keep short work straightforward.
+
+4. Fix causes instead of adding layers
+
+Prefer, in order
+- Removing an unnecessary requirement.
+- Correcting the existing implementation or configuration.
+- Using a supported native capability.
+- Consolidating duplicate paths into one existing path.
+- Adding a small component only when the preceding options cannot solve the demonstrated problem.
+
+Do not answer every failure with another retry loop, guard, service, database, manager, policy file, or mandatory operator step.
+
+Examples
+- If task descriptions are missing, inspect the existing recorded history and data source before requiring people to write descriptions.
+- If a subscription tool already works, use that connection instead of requesting browser setup or a separate API key.
+- If progress exists but is not displayed, fix its connection to the dashboard before adding another progress system.
+- If a timer restores obsolete settings, fix or remove the writer instead of adding a second timer to fight it.
+
+Remove stale instructions at their source. Do not keep appending exceptions until the prompt becomes a history of past mistakes.
+
+5. Make tool and model selection dependable
+
+Identify and honor the operator’s current defaults. Verify exact model identifiers, authentication routes, and actual tool calls against the installed system.
+
+Do not confuse a model’s name with a quality setting, filename, or assistant claim. Never silently substitute another model or route and describe it as the requested one.
+
+Prefer the existing authenticated native connection when it supports the task. Treat stale discovery lists as something to verify, not an automatic reason to demand new setup.
+
+Keep explicit alternatives and capabilities such as trained LoRAs available. A specialized workflow should activate because the task needs it or the operator requests it, not because an old blanket rule forces every task through it.
+
+6. Keep validation useful and proportional
+
+Remove obsolete tests and gates whose only purpose is enforcing a workflow being retired. Remove arbitrary quality scores and approval rituals that routinely prevent usable work from reaching the requester.
+
+Keep checks that establish something important the output exists and opens, the requested operation happened, the result belongs to the correct task, and delivery goes to the correct destination.
+
+Use focused regression tests for demonstrated bugs and meaningful failure cases. Do not create tests merely to mirror implementation details or expand a test count. Once appropriate checks pass, finish unless new evidence warrants further investigation.
+
+For batches, report individual failures and deliver usable results when that satisfies the request. Do not hide a partial failure or discard good work because one sibling item failed.
+
+7. Preserve what already works
+
+Preserve existing page layouts, visual design, useful controls, requester associations, conversation context, and generated-media history unless a specific change is needed or requested.
+
+Removing a review process does not require redesigning its page or deleting its history.
+
+Preserve credentials, private data, access boundaries, spending authorization, cancellation, resource limits, and protection against duplicate external actions. Simplify redundant implementations without removing necessary protection.
+
+Do not rewrite history to manufacture success, approval, or delivery. Do not blindly resend messages, rerun paid jobs, delete generated assets, or interrupt active work as part of cleanup.
+
+8. Apply changes to the real source
+
+Determine which files are authoritative and which are mirrors or generated outputs. Make the change where it actually takes effect, using the installation’s existing deployment and backup tools.
+
+Work in coherent, reversible batches. Remove obsolete callers, instructions, schedules, and tests along with the mechanism they depended on. Avoid leaving a second competing implementation behind.
+
+Restart only affected services when needed and when their work can tolerate it. Verify the running behavior, then synchronize the reviewable source according to the project’s ownership model. Keep secrets out of repositories and reports.
+
+9. Finish with evidence, not a new process
+
+Report concisely
+- The recurring problems found and their actual causes.
+- What was removed or simplified.
+- What useful behavior was preserved.
+- What was tested and observed on the running system.
+- Any specific unresolved issue requiring real follow-up.
+
+Measure reduced steps, duplicate work, background activity, or runtime cost where practical. Do not invent performance improvements. Code deletion is useful, but reliability and a simpler execution path matter more than a line-count target.
+
+If you add runtime code or a component, explain why it is necessary and what complexity it replaces.
+
+Keep one concise record of the changes using the existing documentation convention. Do not create a recurring audit program, new approval workflow, or cleanup framework.
+
+The desired outcome is simple I ask for a result, you use the right tools, resolve ordinary problems without unnecessary questions, deliver the result, and finish.
